@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+    <!-- Background -->
+    <rect width="800" height="500" fill="#0d0d12"/>
+    
+    <!-- Cyberpunk Grid -->
+    <g stroke="#ff3e3e" stroke-width="1" opacity="0.1">
+        <path d="M0,100 L800,100 M0,200 L800,200 M0,300 L800,300 M0,400 L800,400"/>
+        <path d="M100,0 L100,500 M200,0 L200,500 M300,0 L300,500 M400,0 L400,500 M500,0 L500,500 M600,0 L600,500 M700,0 L700,500"/>
+    </g>
+
+    <!-- Connections -->
+    <path d="M 400 250 L 200 150" stroke="#8b5cf6" stroke-width="4" stroke-dasharray="8,4" opacity="0.8"/>
+    <path d="M 400 250 L 600 150" stroke="#10b981" stroke-width="4" stroke-dasharray="8,4" opacity="0.8"/>
+    <path d="M 400 250 L 400 400" stroke="#3b82f6" stroke-width="4" stroke-dasharray="8,4" opacity="0.8"/>
+
+    <!-- Central Node (Tokyo Lobster) -->
+    <g transform="translate(400, 250)">
+        <circle r="60" fill="#1a1a2e" stroke="#ff3e3e" stroke-width="4"/>
+        <circle r="40" fill="#ff3e3e" opacity="0.1"/>
+        <text x="0" y="10" font-family="sans-serif" font-size="40" text-anchor="middle">🦞</text>
+        <text x="0" y="90" font-family="sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold">TOKYO LOBSTER</text>
+    </g>
+
+    <!-- Node: Discord -->
+    <g transform="translate(200, 150)">
+        <circle r="40" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="4"/>
+        <text x="0" y="8" font-family="sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="bold">💬</text>
+        <text x="0" y="70" font-family="sans-serif" font-size="14" fill="#8b5cf6" text-anchor="middle" font-weight="bold">Discord</text>
+    </g>
+
+    <!-- Node: WeCom -->
+    <g transform="translate(600, 150)">
+        <circle r="40" fill="#1a1a2e" stroke="#10b981" stroke-width="4"/>
+        <text x="0" y="8" font-family="sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="bold">🏢</text>
+        <text x="0" y="70" font-family="sans-serif" font-size="14" fill="#10b981" text-anchor="middle" font-weight="bold">WeCom</text>
+    </g>
+
+    <!-- Node: Gemini/Image Generation -->
+    <g transform="translate(400, 400)">
+        <circle r="40" fill="#1a1a2e" stroke="#3b82f6" stroke-width="4"/>
+        <text x="0" y="8" font-family="sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="bold">✨</text>
+        <text x="0" y="70" font-family="sans-serif" font-size="14" fill="#3b82f6" text-anchor="middle" font-weight="bold">Gemini Vision</text>
+    </g>
+
+    <!-- Floating data elements -->
+    <circle cx="280" cy="210" r="5" fill="#8b5cf6" opacity="0.8"/>
+    <circle cx="340" cy="240" r="3" fill="#8b5cf6" opacity="0.6"/>
+    
+    <circle cx="520" cy="210" r="5" fill="#10b981" opacity="0.8"/>
+    <circle cx="460" cy="240" r="3" fill="#10b981" opacity="0.6"/>
+
+    <circle cx="400" cy="310" r="5" fill="#3b82f6" opacity="0.8"/>
+    <circle cx="400" cy="350" r="3" fill="#3b82f6" opacity="0.6"/>
+</svg>

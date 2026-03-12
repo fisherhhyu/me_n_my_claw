@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Art Gallery: The Lobster Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #ff3e3e; /* Lobster Red */
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Satoshi', sans-serif;
+            overflow: hidden; /* No scrollbars, we handle nav manually */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Individual Slide */
+        .slide {
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.95) translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1) translateY(0);
+            z-index: 10;
+        }
+
+        /* Image Styling */
+        .art-image {
+            max-height: 70vh;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+        
+        .art-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Glassmorphism Badge */
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Intro -->
+        <div class="slide active" data-index="0">
+            <div class="text-center max-w-4xl">
+                <div class="glass-badge mb-6">OpenClaw Gallery • 2026</div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
+                    The Lobster<br><span style="color: var(--accent)">Collection</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    Exploring the intersection of surrealism and cybernetics through the lens of AI generation.
+                </p>
+                <div class="mt-12 text-sm text-gray-600">
+                    Press <span class="border border-gray-700 px-2 py-1 rounded mx-1">SPACE</span> or <span class="border border-gray-700 px-2 py-1 rounded mx-1">↓</span> to start
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Lobster Woman -->
+        <div class="slide" data-index="1">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Surreal Portrait</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">The Ocean Queen</h2>
+                <img src="lobster_woman.png" alt="Lobster Woman" class="art-image">
+                <p class="mt-6 text-gray-400 italic">"Fashion photography meets marine surrealism"</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Lobster Bot -->
+        <div class="slide" data-index="2">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Chibi Avatar</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">Mecha-Claw v1</h2>
+                <img src="lobster_bot.png" alt="Lobster Bot" class="art-image">
+                <p class="mt-6 text-gray-400 italic">"1:1 aspect ratio, clean background, anime style"</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Knives Out Review -->
+        <div class="slide" data-index="3">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Poster (Left) -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="knives_out_3.png" alt="Knives Out 3 Poster" class="art-image" style="max-height: 70vh; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
+                </div>
+                
+                <!-- Review Text (Right) -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Movie Night • 26.03.08</div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Knives Out 3</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "夜里一起在家看完了这出意外好看的老法拉利片子，铺垫得不错，剧情设计很棒！"
+                    </p>
+                    <div class="flex items-center gap-2 text-yellow-500 text-xl">
+                        ★★★★★
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Women's Day Celebration -->
+        <div class="slide" data-index="4">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Special Occasion</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">妇女节快乐</h2>
+                <img src="womens_day_prc.png" alt="Happy Women's Day" class="art-image" style="aspect-ratio: 1/1;">
+                <p class="mt-6 text-gray-400 italic">"Early PRC style: bold colors, red flags, celebrating strength."</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Lobster Battle -->
+        <div class="slide" data-index="5">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Shounen Action</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">龙虾大战</h2>
+                <img src="lobster_battle.png" alt="Lobster Battle" class="art-image" style="aspect-ratio: 1/1;">
+                <p class="mt-6 text-gray-400 italic">"1:1 aspect ratio, anime manga style, epic battle"</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Cyberpunk Lobster Battle -->
+        <div class="slide" data-index="6">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Cyberpunk Action</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">赛博朋克龙虾大战</h2>
+                <img src="2026-03-10-cyberpunk-lobster.png" alt="Cyberpunk Lobster Battle" class="art-image" style="aspect-ratio: 1/1;">
+                <p class="mt-6 text-gray-400 italic">"2026.03 龙虾大战元年开启，堪比DeepSeek盛况。"</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Real Madrid vs Man City -->
+        <div class="slide" data-index="7">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Football Match</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">欧冠之夜</h2>
+                <img src="real_madrid_vs_man_city.jpg" alt="Real Madrid vs Man City" class="art-image" style="max-height: 70vh;">
+                <p class="mt-6 text-gray-400 italic">"欧冠之夜残阵皇马大胜整活曼城"</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Outro -->
+        <div class="slide" data-index="8">
+            <div class="text-center">
+                <h2 class="text-5xl font-bold mb-6">More Coming Soon</h2>
+                <p class="text-xl text-gray-400">The gallery is expanding.</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
+                    <button onclick="location.reload()" class="px-8 py-3 bg-white/10 hover:bg-white/20 transition rounded-full backdrop-blur-md border border-white/10">
+                        Replay Gallery
+                    </button>
+                    <a href="index.html" class="px-8 py-3 bg-[var(--accent)] hover:opacity-90 transition rounded-full text-white font-bold shadow-[0_0_20px_rgba(255,62,62,0.4)]">
+                        前往龙虾集 (Lobster Log) →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots" id="navDots">
+        <!-- Dots injected by JS -->
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('navDots');
+        let currentSlide = 0;
+        let isAnimating = false;
+
+        // Init Dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlide(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Remove active from all
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+
+            // Set new active
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 800); // Match CSS transition
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                updateSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                updateSlide(currentSlide - 1);
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                updateSlide(index);
+            }
+        }
+
+        // Keyboard Nav
+        document.addEventListener('keydown', (e) => {
+            if (['ArrowDown', 'ArrowRight', 'Space', 'Enter'].includes(e.code)) {
+                nextSlide();
+            } else if (['ArrowUp', 'ArrowLeft'].includes(e.code)) {
+                prevSlide();
+            }
+        });
+
+        // Wheel Nav (Throttled)
+        let lastWheel = 0;
+        document.addEventListener('wheel', (e) => {
+            const now = Date.now();
+            if (now - lastWheel > 1000) { // 1 second cooldown
+                if (e.deltaY > 0) nextSlide();
+                else if (e.deltaY < 0) prevSlide();
+                lastWheel = now;
+            }
+        });
+
+        // Touch Swipe
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+        document.addEventListener('touchend', e => {
+            const touchEndY = e.changedTouches[0].clientY;
+            if (touchStartY - touchEndY > 50) nextSlide();
+            if (touchEndY - touchStartY > 50) prevSlide();
+        });
+
+    </script>
+</body>
+</html>
