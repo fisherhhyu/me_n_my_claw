@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙虾集 | Me and my Claw</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #3e82ff; /* OpenClaw Blue */
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Satoshi', sans-serif;
+            overflow: hidden; /* No scrollbars, we handle nav manually */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Individual Slide */
+        .slide {
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.95) translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1) translateY(0);
+            z-index: 10;
+        }
+
+        /* Image Styling */
+        .art-image {
+            max-height: 60vh;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+        
+        .art-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Glassmorphism Badge */
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Gallery -->
+    <a href="gallery.html" class="absolute top-6 left-6 z-50 text-gray-400 hover:text-white flex items-center gap-2 transition">
+        ← 回到画廊 (Gallery)
+    </a>
+
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Intro -->
+        <div class="slide active" data-index="0">
+            <div class="text-center max-w-4xl">
+                <div class="glass-badge mb-6">龙虾集 • OpenClaw Log</div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
+                    Me and my<br><span style="color: var(--accent)">Claw</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    记录近期和 OpenClaw 一起完成的事情与探索。
+                </p>
+                <div class="mt-12 text-sm text-gray-600">
+                    按 <span class="border border-gray-700 px-2 py-1 rounded mx-1">空格</span> 或 <span class="border border-gray-700 px-2 py-1 rounded mx-1">↓</span> 开始
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: 3 Claws -->
+        <div class="slide" data-index="1">
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="glass-badge">Infrastructure</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-8">三节点部署达成</h2>
+                <img src="three_claws.svg" alt="3 Claws Architecture" class="art-image bg-gray-900">
+                <p class="mt-6 text-xl text-gray-200 text-center max-w-2xl leading-relaxed">
+                    我安装了 3 个 claw：一个在东京🗼，一个在北京🏮，还有一个在家里的虚拟机💻。
+                </p>
+                <p class="mt-4 text-gray-400 italic">"全球算力，触手可及"</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Tokyo Lobster Gemini -->
+        <div class="slide" data-index="2">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-tokyo-lobster-chat.png" alt="Tokyo Lobster System" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Tokyo Node • Multichannel</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">多频道龙虾：连接无界</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "东京的龙虾配置了 Gemini ，连接了 discord ，后来又连接了企业微信。能生图，能多频道多应用聊天。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Beijing Lobster Feishu -->
+        <div class="slide" data-index="3">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="beijing_lobster_feishu.jpg" alt="Beijing Lobster System" class="art-image" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Beijing Node • Workspace</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">全能助理：接管飞书</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "北京的龙虾连接到飞书，接管了邮箱，还安装了 Codebuddy Cli。一个能边聊边处理文档邮件和使唤另一个 AI 写代码的龙虾🦞。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Local VM Lobster GitHub -->
+        <div class="slide" data-index="4">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-local-lobster-github.png" alt="Local VM Lobster Coding" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Local VM Node • Developer</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">极客龙虾：执掌代码</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "本地虚拟机的龙虾，帮我写了几个龙虾可用的 skill，管理我的 GitHub。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Office Discussion -->
+        <div class="slide" data-index="5">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-discussion.png" alt="Office Discussion" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Community • Buzz</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">全员沸腾：龙虾热潮</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "朋友们陆续讨论龙虾能干什么，龙虾怎么安装，公司里也讨论得热火朝天。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Friends Gathering -->
+        <div class="slide" data-index="6">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-friends-gathering-v3.png" alt="Friends Gathering" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Friends • Sharing</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">聚会分享：龙虾出圈</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "我在朋友聚会上给朋友介绍了龙虾，引起了他的兴趣，在他公司投入了使用。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: WorkBuddy -->
+        <div class="slide" data-index="7">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-workbuddy.png" alt="WorkBuddy Lobster" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">WorkBuddy • Productivity</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">轻松办公：文档自由</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "我介绍朋友安装易上手的龙虾“WorkBuddy”，他成功地让 AI 处理了他的文档任务。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Skill Set -->
+        <div class="slide" data-index="8">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-skill-set.png" alt="Lobster Skill Set" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Skills • Collection</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">技能集结：无忧工作</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "我让龙虾打造的 Skill 集合成 Set，工作 demo 交流无忧。"
+                    </p>
+                    <a href="https://fisherhhyu.github.io/" target="_blank" class="inline-block px-6 py-3 mt-2 bg-white/10 hover:bg-[var(--accent)] hover:border-transparent transition rounded-full text-white font-medium border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(62,130,255,0.5)]">
+                        🌐 访问 Fisher's Skill Set →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Yuqian Lobster -->
+        <div class="slide" data-index="9">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="beijing_lobster_yuqian.jpg" alt="Yuqian Lobster Chat" class="art-image" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Beijing Node • Fun</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">赛博捧哏：情绪价值</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "我让北京龙虾帮我记录只言片语，学着于谦跟我捧哏。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Wife Using Lobster -->
+        <div class="slide" data-index="10">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-wife-job-done-v2.png" alt="Wife Working with Lobster" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Family • Job Done</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">得力助手：轻松搞定</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "我让老婆加入用虾行列，她让北京虾给帮忙收集了政策文件，邮件发送。Job Done！"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: VM Resting -->
+        <div class="slide" data-index="11">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-vm-resting.png" alt="VM Lobster Resting" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Local VM Node • Break Time</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">劳逸结合：下班休息</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "本地虾的 VM 运行 48 小时后 SSD 硬盘有异常，还是让它先休息吧。"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Tokyo Lobster Writing Log -->
+        <div class="slide" data-index="12">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-tokyo-lobster-busy-writing.png" alt="Tokyo Lobster Writing" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Tokyo Node • Working Hard</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">幕后功臣：记录美好</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "东京虾正在帮我写龙虾集，忙碌 ing！"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: NAS Lobster -->
+        <div class="slide" data-index="13">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <!-- Image -->
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-12-lobster-nas-setup.png" alt="NAS Lobster Setup" class="art-image bg-gray-900" style="max-height: 60vh;">
+                </div>
+                <!-- Text -->
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Local Node • NAS Ready</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">重新起航：本地部署</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "今天入手 NAS，准备再开始本地龙虾"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: To be continued -->
+        <div class="slide" data-index="14">
+            <div class="text-center">
+                <h2 class="text-5xl font-bold mb-6 text-gray-700">未完待续...</h2>
+                <p class="text-xl text-gray-500">更多故事正在发生。</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots" id="navDots">
+        <!-- Dots injected by JS -->
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('navDots');
+        let currentSlide = 0;
+        let isAnimating = false;
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlide(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 800); 
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                updateSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                updateSlide(currentSlide - 1);
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                updateSlide(index);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (['ArrowDown', 'ArrowRight', 'Space', 'Enter'].includes(e.code)) {
+                nextSlide();
+            } else if (['ArrowUp', 'ArrowLeft'].includes(e.code)) {
+                prevSlide();
+            }
+        });
+
+        let lastWheel = 0;
+        document.addEventListener('wheel', (e) => {
+            const now = Date.now();
+            if (now - lastWheel > 1000) {
+                if (e.deltaY > 0) nextSlide();
+                else if (e.deltaY < 0) prevSlide();
+                lastWheel = now;
+            }
+        });
+
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+        document.addEventListener('touchend', e => {
+            const touchEndY = e.changedTouches[0].clientY;
+            if (touchStartY - touchEndY > 50) nextSlide();
+            if (touchEndY - touchStartY > 50) prevSlide();
+        });
+
+    </script>
+</body>
+</html>
