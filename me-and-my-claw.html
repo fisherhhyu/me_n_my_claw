@@ -77,10 +77,11 @@
         /* Navigation Dots */
         .nav-dots {
             position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             z-index: 20;
         }
@@ -143,7 +144,7 @@
             <div class="flex flex-col items-center h-full justify-center">
                 <div class="glass-badge">Infrastructure</div>
                 <h2 class="text-3xl md:text-5xl font-bold mb-8">三节点部署达成</h2>
-                <img src="three_claws.svg" alt="3 Claws Architecture" class="art-image bg-gray-900">
+                <img src="three_claws.svg" alt="3 Claws Architecture" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 <p class="mt-6 text-xl text-gray-200 text-center max-w-2xl leading-relaxed">
                     我安装了 3 个 claw：一个在东京🗼，一个在北京🏮，还有一个在家里的虚拟机💻。
                 </p>
@@ -156,7 +157,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-tokyo-lobster-chat.png" alt="Tokyo Lobster System" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-tokyo-lobster-chat.png" alt="Tokyo Lobster System" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -174,7 +175,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="beijing_lobster_feishu.jpg" alt="Beijing Lobster System" class="art-image" style="max-height: 60vh;">
+                    <img src="beijing_lobster_feishu.jpg" alt="Beijing Lobster System" class="art-image" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -192,7 +193,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-local-lobster-github.png" alt="Local VM Lobster Coding" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-local-lobster-github.png" alt="Local VM Lobster Coding" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -210,7 +211,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-discussion.png" alt="Office Discussion" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-discussion.png" alt="Office Discussion" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -228,7 +229,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-friends-gathering-v3.png" alt="Friends Gathering" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-friends-gathering-v3.png" alt="Friends Gathering" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -246,7 +247,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-workbuddy.png" alt="WorkBuddy Lobster" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-workbuddy.png" alt="WorkBuddy Lobster" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -264,7 +265,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-skill-set.png" alt="Lobster Skill Set" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-skill-set.png" alt="Lobster Skill Set" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -285,7 +286,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="beijing_lobster_yuqian.jpg" alt="Yuqian Lobster Chat" class="art-image" style="max-height: 60vh;">
+                    <img src="beijing_lobster_yuqian.jpg" alt="Yuqian Lobster Chat" class="art-image" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -303,7 +304,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-wife-job-done-v2.png" alt="Wife Working with Lobster" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-wife-job-done-v2.png" alt="Wife Working with Lobster" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -321,7 +322,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-vm-resting.png" alt="VM Lobster Resting" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-vm-resting.png" alt="VM Lobster Resting" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -339,7 +340,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-tokyo-lobster-busy-writing.png" alt="Tokyo Lobster Writing" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-tokyo-lobster-busy-writing.png" alt="Tokyo Lobster Writing" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -357,7 +358,7 @@
             <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
                 <!-- Image -->
                 <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                    <img src="2026-03-12-lobster-nas-setup.png" alt="NAS Lobster Setup" class="art-image bg-gray-900" style="max-height: 60vh;">
+                    <img src="2026-03-12-lobster-nas-setup.png" alt="NAS Lobster Setup" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 </div>
                 <!-- Text -->
                 <div class="w-full md:w-1/2 text-left">
@@ -462,5 +463,36 @@
         });
 
     </script>
+
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black/95 z-[100] hidden flex items-center justify-center cursor-zoom-out opacity-0 transition-opacity duration-300" onclick="closeImageModal()">
+        <img id="modalImage" class="max-w-[95vw] max-h-[95vh] object-contain transform scale-95 transition-transform duration-300" src="" alt="Zoomed">
+    </div>
+    
+    <script>
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            // Force reflow
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+
 </body>
 </html>
