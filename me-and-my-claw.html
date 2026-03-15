@@ -16,6 +16,8 @@
         
         body {
             background-color: var(--bg-color);
+            overscroll-behavior: none; /* Prevent pull-to-refresh */
+            touch-action: none; /* Prevent browser scrolling on swipe */
             color: var(--text-main);
             font-family: 'Satoshi', sans-serif;
             overflow: hidden; /* No scrollbars, we handle nav manually */
@@ -470,6 +472,12 @@
 
         let touchStartY = 0;
         document.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+        
+        // Prevent default touch scrolling/bounce
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
         document.addEventListener('touchend', e => {
             const touchEndY = e.changedTouches[0].clientY;
             if (touchStartY - touchEndY > 50) nextSlide();
