@@ -76,30 +76,71 @@
             transform: scale(1.02);
         }
 
-        /* Navigation Dots */
-        .nav-dots {
+        /* Bottom Control Bar & Progress */
+        .slide-controls {
             position: absolute;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 20;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .control-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .slide-counter {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            font-weight: 500;
+            letter-spacing: 2px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
             z-index: 20;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
+        .progress-bar-fill {
+            height: 100%;
             background: var(--accent);
-            transform: scale(1.2);
+            width: 0%;
+            transition: width 0.4s ease-out;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         /* Glassmorphism Badge */
@@ -501,34 +542,42 @@
 
     </div>
 
-    <!-- Navigation Dots -->
-    <div class="nav-dots" id="navDots">
-        <!-- Dots injected by JS -->
+    <!-- Slide Controls & Progress -->
+    <div class="slide-controls">
+        <button class="control-btn" onclick="prevSlide()" title="Previous (Up/Left)">←</button>
+        <div class="slide-counter"><span id="currentNum">1</span><span class="text-gray-500 mx-1">/</span><span id="totalNum"></span></div>
+        <button class="control-btn" onclick="nextSlide()" title="Next (Down/Right)">→</button>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
     </div>
 
     <script>
         const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('navDots');
         let currentSlide = 0;
         let isAnimating = false;
 
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.onclick = () => goToSlide(index);
-            dotsContainer.appendChild(dot);
-        });
+        const currentNumEl = document.getElementById('currentNum');
+        const totalNumEl = document.getElementById('totalNum');
+        const progressBarEl = document.getElementById('progressBar');
+        
+        // Initialize totals
+        totalNumEl.textContent = slides.length;
+        updateProgress(0);
 
-        const dots = document.querySelectorAll('.dot');
+        function updateProgress(index) {
+            currentNumEl.textContent = index + 1;
+            const percentage = ((index + 1) / slides.length) * 100;
+            progressBarEl.style.width = percentage + '%';
+        }
 
         function updateSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
 
             currentSlide = index;
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            
+            updateProgress(index);
 
             setTimeout(() => {
                 isAnimating = false;
