@@ -76,30 +76,71 @@
             transform: scale(1.02);
         }
 
-        /* Navigation Dots */
-        .nav-dots {
+        /* Bottom Control Bar & Progress */
+        .slide-controls {
             position: absolute;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 20;
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .control-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .slide-counter {
+            font-family: 'Satoshi', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-weight: 500;
+            letter-spacing: 1px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
             z-index: 20;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
+        .progress-bar-fill {
+            height: 100%;
             background: var(--accent);
-            transform: scale(1.2);
+            width: 0%;
+            transition: width 0.4s ease-out;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         /* Glassmorphism Badge */
@@ -474,8 +515,42 @@
             </div>
         </div>
 
-        <!-- Slide 20: To be continued -->
+        <!-- Slide 20: TSA Lobster -->
         <div class="slide" data-index="19">
+            <div class="absolute top-6 right-6 text-sm text-gray-400 font-mono tracking-wider z-10 opacity-70 border border-gray-600/50 rounded-full px-3 py-1 bg-black/20 backdrop-blur-sm">🗓 2026-03-19</div>
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-tsa-lobster.svg" alt="TSA Lobster" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
+                </div>
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Cloud • Advisor</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 leading-tight">智能顾问 TSA</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "智能顾问 TSA 的龙虾也要来了（智能顾问是指腾讯云智能顾问 TSA）"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: E-shaped Talent -->
+        <div class="slide" data-index="20">
+            <div class="absolute top-6 right-6 text-sm text-gray-400 font-mono tracking-wider z-10 opacity-70 border border-gray-600/50 rounded-full px-3 py-1 bg-black/20 backdrop-blur-sm">🗓 2026-03-20</div>
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl w-full gap-8 md:gap-16 px-4">
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <img src="2026-03-e-talent.jpg" alt="培养 E 型人才" class="art-image bg-gray-900" style="max-height: 35vh; cursor: zoom-in;" onclick="openImageModal(this.src)">
+                </div>
+                <div class="w-full md:w-1/2 text-left">
+                    <div class="glass-badge mb-4">Growth • Talent</div>
+                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 leading-tight">培养 E 型人才</h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6 font-light border-l-4 border-[var(--accent)] pl-6">
+                        "培养 E 型人才"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: To be continued -->
+        <div class="slide" data-index="21">
             <div class="text-center">
                 <h2 class="text-5xl font-bold mb-6 text-gray-700">未完待续...</h2>
                 <p class="text-xl text-gray-500">更多故事正在发生。</p>
@@ -484,34 +559,42 @@
 
     </div>
 
-    <!-- Navigation Dots -->
-    <div class="nav-dots" id="navDots">
-        <!-- Dots injected by JS -->
+    <!-- Slide Controls & Progress -->
+    <div class="slide-controls">
+        <button class="control-btn" onclick="prevSlide()" title="Previous (Up/Left)">←</button>
+        <div class="slide-counter"><span id="currentNum">1</span><span class="text-gray-500 mx-1">/</span><span id="totalNum"></span></div>
+        <button class="control-btn" onclick="nextSlide()" title="Next (Down/Right)">→</button>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
     </div>
 
     <script>
         const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('navDots');
         let currentSlide = 0;
         let isAnimating = false;
 
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.onclick = () => goToSlide(index);
-            dotsContainer.appendChild(dot);
-        });
+        const currentNumEl = document.getElementById('currentNum');
+        const totalNumEl = document.getElementById('totalNum');
+        const progressBarEl = document.getElementById('progressBar');
+        
+        // Initialize totals
+        totalNumEl.textContent = slides.length;
+        updateProgress(0);
 
-        const dots = document.querySelectorAll('.dot');
+        function updateProgress(index) {
+            currentNumEl.textContent = index + 1;
+            const percentage = ((index + 1) / slides.length) * 100;
+            progressBarEl.style.width = percentage + '%';
+        }
 
         function updateSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
 
             currentSlide = index;
             slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            
+            updateProgress(index);
 
             setTimeout(() => {
                 isAnimating = false;
