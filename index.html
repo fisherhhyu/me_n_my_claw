@@ -46,7 +46,7 @@
             left: 0;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
             transform: scale(0.95) translateY(20px);
             display: flex;
             flex-direction: column;
@@ -632,7 +632,7 @@
 
             setTimeout(() => {
                 isAnimating = false;
-            }, 800); 
+            }, 300); 
         }
 
         function nextSlide() {
@@ -666,18 +666,61 @@
             }
         });
 
-        let touchStartY = 0;
-        document.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+        // Unified Drag & Swipe Logic (Mouse + Touch)
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        const dragThreshold = 40;
+
+        function handleDragStart(x, y) {
+            startX = x;
+            startY = y;
+            isDragging = true;
+        }
+
+        function handleDragEnd(x, y) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            let diffX = startX - x;
+            let diffY = startY - y;
+            
+            // Ignore tiny movements (clicks)
+            if (Math.abs(diffX) < dragThreshold && Math.abs(diffY) < dragThreshold) return;
+            
+            // Prioritize the dominant direction
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > dragThreshold) nextSlide(); // Swipe left -> next
+                else prevSlide(); // Swipe right -> prev
+            } else {
+                if (diffY > dragThreshold) nextSlide(); // Swipe up -> next
+                else prevSlide(); // Swipe down -> prev
+            }
+        }
+
+        // Mouse Events
+        document.addEventListener('mousedown', e => {
+            // Only trigger drag on main background/slide, not on clickable elements
+            if (e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button' || e.target.classList.contains('art-image')) return;
+            handleDragStart(e.clientX, e.clientY);
+        });
+        document.addEventListener('mouseup', e => handleDragEnd(e.clientX, e.clientY));
+        document.addEventListener('mouseleave', e => isDragging = false);
+
+        // Touch Events
+        document.addEventListener('touchstart', e => {
+            handleDragStart(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
         
-        // Prevent default touch scrolling/bounce
         document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
+            // Prevent default scrolling unless dragging an image
+            if (!e.target.classList.contains('art-image')) {
+                e.preventDefault();
+            }
         }, { passive: false });
         
         document.addEventListener('touchend', e => {
-            const touchEndY = e.changedTouches[0].clientY;
-            if (touchStartY - touchEndY > 50) nextSlide();
-            if (touchEndY - touchStartY > 50) prevSlide();
+            handleDragEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
         });
 
     </script>
